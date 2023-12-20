@@ -103,7 +103,10 @@ public abstract class BasePopupView extends FrameLayout implements LifecycleObse
             return this;
         }
         if (popupInfo == null) {
-            throw new IllegalArgumentException("popupInfo is null, if your popup object is reused, do not set isDestroyOnDismiss(true) !");
+            if (XPopup.getPrintLogEnable()) {
+                Log.e("BasePopupView", "popupInfo is null, if your popup object is reused, do not set isDestroyOnDismiss(true) !");
+            }
+            return this;
         }
         if (popupStatus == PopupStatus.Showing) {
             return this;
@@ -140,7 +143,10 @@ public abstract class BasePopupView extends FrameLayout implements LifecycleObse
 
     private void attachToHost() {
         if (popupInfo == null) {
-            throw new IllegalArgumentException("如果弹窗对象是复用的，则不要设置isDestroyOnDismiss(true)");
+            if (XPopup.getPrintLogEnable()) {
+                Log.e("BasePopupView", "如果弹窗对象是复用的，则不要设置isDestroyOnDismiss(true) !");
+            }
+            return;
         }
         if (getContext() == null) {
             return;
@@ -385,7 +391,7 @@ public abstract class BasePopupView extends FrameLayout implements LifecycleObse
             ViewGroup decorView = (ViewGroup) getParent();
             if (decorView != null) decorView.removeView(this);
         } else {
-            if (dialog != null&&dialog.isShowing()) dialog.dismiss();
+            if (dialog != null && dialog.isShowing()) dialog.dismiss();
         }
         if (XPopup.getPrintLogEnable()) {
             Log.e("BasePopupView", "detachFromHost====detachFromHost");

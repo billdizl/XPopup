@@ -391,7 +391,9 @@ public abstract class BasePopupView extends FrameLayout implements LifecycleObse
             ViewGroup decorView = (ViewGroup) getParent();
             if (decorView != null) decorView.removeView(this);
         } else {
-            if (dialog != null && dialog.isShowing()) dialog.dismiss();
+            if (dialog != null && dialog.isShowing()) {
+                dialog.dismiss();
+            }
         }
         if (XPopup.getPrintLogEnable()) {
             Log.e("BasePopupView", "detachFromHost====detachFromHost");
